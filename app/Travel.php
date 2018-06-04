@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Travel extends Model
 {
-    protected $fillable = ['nama wisata','kuliner','artkikel','oleh oleh'];
+    protected $fillable = ['nama_wisata','kuliner','artkikel'];
     public $timestamps  = true;
 
-        public function Kategori()
+        public function kategori()
         {
-            return $this->belongsTo('App\Kategori' , 'travel_id')
+            return $this->belongsTo('App\Kategori' , 'travel_id');
         }
 }

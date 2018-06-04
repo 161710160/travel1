@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    protected $fillable = ['tempat wisata','tips','who am i'];
+    protected $fillable = ['nama_wisata'];
     public $timestamps  = true;
 
-        public function Travel()
+        public function travel()
         {
-            return $this->hasMany('App\Travel' , 'kategori_id')
+            return $this->hasMany('App\Travel' , 'kategori_id');
         }
 }

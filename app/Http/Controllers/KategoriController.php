@@ -14,7 +14,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori =  Kategori::all();
+        return view('kategori.index', compact('kategori'));
     }
 
     /**
@@ -24,7 +25,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
     /**
@@ -35,8 +36,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'nama_wisata' => 'required|',
+            ]);
+        $kategori = new Kategori;
+        $kategori->nama_wisata = $request->nama_wisata;
+        $kategori->save();
+        return redirect()->route('kategori.index');
     }
+    
 
     /**
      * Display the specified resource.
@@ -46,7 +54,8 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        return view('kategori.show',compact('kategori'));
     }
 
     /**
@@ -57,7 +66,8 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        return view('kategori.edit',compact('kategori'));
     }
 
     /**
@@ -69,7 +79,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $this->validate($request,[
+            'nama_wisata' => 'required|',
+        ]);
+        $kategori = Kategori::findOrFail($id);
+        $kategori->nama_wisata = $request->nama_wisata;
+        $kategori->save();
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -80,6 +96,8 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete(); 
+        return redirect()->route('kategori.index');
     }
 }
